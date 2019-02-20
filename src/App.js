@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from 'react'
+import { useGoogleMap } from './hooks/useGoogleMap'
+import { useMap } from './hooks/useMap'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+const API_KEY = undefined
+
+const initialConfig = {
+  zoom: 12,
+  center: { lat: 35.6432027, lng: 139.6729435 }
 }
 
-export default App;
+function App (props) {
+  const googleMap = useGoogleMap(API_KEY)
+  const mapContainerRef = useRef(null)
+  useMap({ googleMap, mapContainerRef, initialConfig })
+  return (
+    <div
+      style={{
+        height: '100vh',
+        width: '100%'
+      }}
+      ref={mapContainerRef}
+    />
+  )
+}
+
+export default App

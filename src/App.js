@@ -1,13 +1,31 @@
-import React, { useRef } from 'react'
-import KdTree from 'kd-tree-js'
+import React, { useRef, useEffect } from 'react'
 
 import { useGoogleMap } from './hooks/useGoogleMap'
 import { useMap } from './hooks/useMap'
 
-import route from './data/route.json'
 import response from './data/response.json'
 
 const API_KEY = 'AIzaSyDybC5A45G_4GudlnE3Q-wxRIjNPckIxys'
+
+function getColor (group) {
+  switch (group) {
+    case 'flokkur1':
+      return 'red'
+    case 'flokkur2':
+      return 'blue'
+    case 'flokkur3':
+      return 'green'
+    case 'flokkur4':
+      return 'purple'
+    default:
+      return 'black'
+  }
+}
+
+function getMarkerColor (group) {
+  var color = getColor(group)
+  return `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png` 
+}
 
 // Iceland: 64.9631° N, 19.0208° W
 const initialConfig = {
@@ -15,35 +33,36 @@ const initialConfig = {
   center: { lat: 64.9631, lng: -19.0212 }
 }
 
-var tree = new KdTree(route, distance, ['Lat', 'Lon'])
-
-// var tree = new KDTree(geoJSON.features.map(function(f) {
-//   var ref = f.geometry.coordinates.slice().reverse();
-//   f.feature = f;
-//   return f;
-// }), distance, [0, 1]);
-
 function App () {
   const googleMap = useGoogleMap(API_KEY)
   const mapContainerRef = useRef(null)
-  useMap({ googleMap, mapContainerRef, initialConfig })
-  console.log(response.length)
+  var map = useMap({ googleMap, mapContainerRef, initialConfig })
+  
+  useEffect(() => {
+  if (googleMap !== null && map !== null) {
+    response.map(item => {
+      var point = {lat: item.geometry.coordinates[1], lng: item.geometry.coordinates[0]}
+      new googleMap.maps.Marker({
+        position: point,
+        title: item.properties.name,
+        icon: getMarkerColor(item.properties.hopurclass),
+        map: map
+      })
+    })
+  }
+  }, [googleMap, map])
+
+  console.log('App render')
   return (
-    <div
-      style={{ height: '100vh', width: '100%' }}
-      ref={mapContainerRef}
-    />
+    <div>
+      {mapContainerRef !== null &&
+        <div
+        style={{ height: '100vh', width: '100%' }}
+        ref={mapContainerRef}
+        />
+    }
+    </div>
   )
-}
-
-// function distance(a, b){
-//   return map.options.crs.distance(L.latLng(a), L.latLng(b));
-// }
-
-
-const distance = (a, b) => {
-  // Could use haversine, but fuck it (https://en.wikipedia.org/wiki/Haversine_formula)
-  return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2)
 }
 
 export default App

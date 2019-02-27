@@ -12,6 +12,7 @@ export const useMap = ({ googleMap, mapContainerRef, initialConfig }) => {
         initialConfig
       )
       setMap(map)
+      console.log('effect useMap')
     },
     [googleMap, mapContainerRef]
   )

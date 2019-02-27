@@ -6,6 +6,7 @@ export const useGoogleMap = apiKey => {
   useEffect(() => {
     GoogleMapsApiLoader({ apiKey }).then(google => {
       setGoogleMap(google)
+      console.log('effect useGoogleMap')
     })
   }, [])
   return googleMap

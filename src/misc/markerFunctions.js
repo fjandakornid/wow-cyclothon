@@ -1,5 +1,3 @@
-/* global googleMap */
-
 function getColor (group) {
   switch (group) {
     case 'flokkur1':
@@ -20,7 +18,7 @@ export function getMarkerColor (group) {
   return `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
 }
 
-export function initMarkersAndAddToMap (geoJson, map) {
+export function initMarkersAndAddToMap (geoJson, googleMap, map) {
   var markers = []
   geoJson.map(item => {
     var point = { lat: item.geometry.coordinates[1], lng: item.geometry.coordinates[0] }
@@ -30,11 +28,11 @@ export function initMarkersAndAddToMap (geoJson, map) {
       icon: getMarkerColor(item.properties.hopurclass),
       map: map
     })
-    markers.add(marker)
+    markers.push(marker)
   })
   return markers
 }
 
-export function moveToPoint (map, marker) {
+export function moveToMarker (map, marker) {
   map.panTo(marker.position)
 }

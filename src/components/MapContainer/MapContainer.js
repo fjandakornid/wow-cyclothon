@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useContext } from 'react'
+
+import { MapContext } from '../../misc/MapContext'
 
 import { useGoogleMap } from '../../hooks/useGoogleMap'
 import { useMap } from '../../hooks/useMap'
@@ -19,8 +21,9 @@ const MapContainer = React.memo(function Mappy (props) {
   const googleMap = useGoogleMap(API_KEY)
   const mapContainerRef = useRef(null)
   var map = useMap({ googleMap, mapContainerRef, initialConfig })
+  const { state, dispatch } = useContext(MapContext)
 
-  async function initMarkers() {
+  async function initMarkers () {
     const response = await contestantsApi.getGeoJson()
     var markers = initMarkersAndAddToMap(response, googleMap, map)
     moveToMarker(map, markers[0])

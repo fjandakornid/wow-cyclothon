@@ -13,7 +13,7 @@ function getColor (group) {
   }
 }
 
-export function getMarkerColor (group) {
+function getMarkerColor (group) {
   var color = getColor(group)
   return `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
 }

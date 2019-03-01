@@ -1,6 +1,7 @@
 import React from 'react'
 import ErrorBoundary from 'react-error-boundary'
 
+import { MapContextProvider } from './misc/MapContext'
 import MapContainer from './components/MapContainer'
 
 function App () {
@@ -23,16 +24,18 @@ function App () {
 
   return (
     <ErrorBoundary onError={myErrorHandler} FallbackComponent={MyFallbackComponent}>
-      <div className='container-fluid'>
-        <div className='row'>
-          <main id='mapContainer' className='col'>
-            <MapContainer />
-          </main>
-          <aside className='col-3'>
-            <div>This is some sidebar</div>
-          </aside>
+      <MapContextProvider>
+        <div className='container-fluid'>
+          <div className='row'>
+            <main id='mapContainer' className='col'>
+              <MapContainer />
+            </main>
+            <aside className='col-3'>
+              <div>This is some sidebar</div>
+            </aside>
+          </div>
         </div>
-      </div>
+      </MapContextProvider>
     </ErrorBoundary>
   )
 }

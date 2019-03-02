@@ -2,13 +2,11 @@ import React, { useRef, useEffect, useContext } from 'react'
 
 import { MapContext } from '../../misc/MapContext'
 
-import { useGoogleMap } from '../../hooks/useGoogleMap'
 import { useMap } from '../../hooks/useMap'
+import { useGoogleMap } from '../../hooks/useGoogleMap'
+import { useGoogleMarker } from '../../hooks/useGoogleMarker'
 
-import contestantsApi from '../../api/contestantsApi'
-import { initMarkersAndAddToMap, moveToMarker } from '../../misc/markerFunctions'
-
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_KEY
+import contestantsApi from '../../api/geoJsonApi'
 
 // Iceland: 64.9631° N, 19.0208° W
 const initialConfig = {
@@ -18,21 +16,23 @@ const initialConfig = {
 }
 
 const MapContainer = React.memo(function Mappy (props) {
-  const googleMap = useGoogleMap(API_KEY)
+  const googleMap = useGoogleMap(process.env.REACT_APP_GOOGLE_MAPS_KEY)
   const mapContainerRef = useRef(null)
-  var map = useMap({ googleMap, mapContainerRef, initialConfig })
+  const map = useMap({ googleMap, mapContainerRef, initialConfig })
+  const { markers, updateMarkers } = useGoogleMarker()
   const { state, dispatch } = useContext(MapContext)
 
-  async function initMarkers () {
+  async function updateData () {
     const response = await contestantsApi.getGeoJson()
-    var markers = initMarkersAndAddToMap(response, googleMap, map)
-    moveToMarker(map, markers[0])
+    dispatch({ type: "UPDATE_GEO_JSON", data: response });
+    updateMarkers(response, googleMap, map)
+    
+    //TODO: calculate travelled distance from kd-tree
   }
 
   useEffect(() => {
     if (googleMap !== null && map !== null) {
-      //TODO: calculate travelled distance from kd-tree
-      initMarkers()
+      updateData()
     }
   }, [googleMap, map])
 

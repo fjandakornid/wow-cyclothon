@@ -7,15 +7,15 @@ let MapContext = React.createContext()
 let initialState = {
   map: null,
   googleMap: null,
-  markers: []
+  geoJson: []
 }
 
 let reducer = (state, action) => {
   switch (action.type) {
-    case 'smuuu':
-      return 'who is that?'
+    case 'UPDATE_GEO_JSON':
+      return { ...state, geoJson: action.data }
     default:
-      return 'mom.. is that you?'
+      return state
   }
 }
 

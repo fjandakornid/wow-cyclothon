@@ -3,7 +3,7 @@ import mockApi from './mock/mockContestantsApi'
 
 const path = 'https://siminnnn.is/static/getgeojson/something'
 
-class contestantsApi {
+class geoJsonApi {
   static getGeoJson () {
     return axios.get(`${path}`).then(
       response => response.data
@@ -11,6 +11,6 @@ class contestantsApi {
   }
 }
 
-let api = process.env.NODE_ENV === 'development' ? mockApi : contestantsApi || contestantsApi
+let api = process.env.NODE_ENV === 'development' ? mockApi : geoJsonApi || geoJsonApi
 
 export default api

@@ -3,6 +3,7 @@ import ErrorBoundary from 'react-error-boundary'
 
 import { MapContextProvider } from './misc/MapContext'
 import MapContainer from './components/MapContainer'
+import Sidebar from './components/Sidebar'
 
 function App () {
   const myErrorHandler = (error, componentStack) => {
@@ -31,7 +32,7 @@ function App () {
               <MapContainer />
             </main>
             <aside className='col-3'>
-              <div>This is some sidebar</div>
+              <Sidebar />
             </aside>
           </div>
         </div>

@@ -1707,3 +1707,9 @@ code {
 
 ::-webkit-resizer {
   background: #222; }
+
+.sidebar {
+  max-height: 100vh;
+  overflow-y: scroll;
+  background: #222;
+  color: #888; }

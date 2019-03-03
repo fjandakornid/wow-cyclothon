@@ -31,7 +31,7 @@ function App () {
             <main id='mapContainer' className='col'>
               <MapContainer />
             </main>
-            <aside className='col-3'>
+            <aside className='col-3 sidebar'>
               <Sidebar />
             </aside>
           </div>

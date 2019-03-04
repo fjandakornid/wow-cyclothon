@@ -7,12 +7,14 @@ import { useGoogleMap } from '../../hooks/useGoogleMap'
 import { useGoogleMarker } from '../../hooks/useGoogleMarker'
 
 import contestantsApi from '../../api/geoJsonApi'
+import mapStyle from '../../data/mapStyle.json'
 
 // Iceland: 64.9631° N, 19.0208° W
 const initialConfig = {
   zoom: 7,
   center: { lat: 64.9631, lng: -19.0212 },
-  mapTypeId: 'terrain'
+  mapTypeId: 'terrain',
+  styles: mapStyle
 }
 
 const MapContainer = React.memo(function Mappy (props) {
@@ -24,10 +26,9 @@ const MapContainer = React.memo(function Mappy (props) {
 
   async function updateData () {
     const response = await contestantsApi.getGeoJson()
-    dispatch({ type: "UPDATE_GEO_JSON", data: response });
+    dispatch({ type: 'UPDATE_GEO_JSON', data: response })
     updateMarkers(response, googleMap, map)
-    
-    //TODO: calculate travelled distance from kd-tree
+    // TODO: calculate travelled distance from kd-tree
   }
 
   useEffect(() => {

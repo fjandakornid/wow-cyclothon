@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { MapContext } from '../misc/MapContext'
+import { MapContext } from '../../misc/MapContext'
 
 const Sidebar = () => {
   const [solo, setSolo] = useState([])

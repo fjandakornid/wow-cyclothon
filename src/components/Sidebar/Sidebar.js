@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { MapContext } from '../../misc/MapContext'
+import RankTable from './RankTable'
 
 import MarkerHandler from '../../misc/MarkerHandler'
 
@@ -24,22 +25,11 @@ const Sidebar = () => {
 
   return (
     <div>
-      <h2>Solo</h2>
-      {solo.map(item => (
-        <div key={item.properties.markerid} onClick={() => locateMarker(item.properties.markerid)}>{item.properties.name}</div>
-      ))}
-      <h2>4 manna lið</h2>
-      {aflokkur.map(item => (
-        <div key={item.properties.markerid} onClick={() => locateMarker(item.properties.markerid)}>{item.properties.name}</div>
-      ))}
-      <h2>10 manna lið</h2>
-      {bflokkur.map(item => (
-        <div key={item.properties.markerid} onClick={() => locateMarker(item.properties.markerid)}>{item.properties.name}</div>
-      ))}
-      <h2>Hjólakraftur</h2>
-      {hjolakraftur.map(item => (
-        <div key={item.properties.markerid} onClick={() => locateMarker(item.properties.markerid)}>{item.properties.name}</div>
-      ))}
+      <RankTable list={solo} title={'Solo'} />
+      <RankTable list={aflokkur} title={'4 manna lið'} />
+      <RankTable list={bflokkur} title={'10 manna lið'} />
+      <RankTable list={hjolakraftur} title={'Hjólakraftur'} />
+      
       {/* {state.geoJson.map(item => (
         <div>{item.properties.name}</div>
       ))} */}

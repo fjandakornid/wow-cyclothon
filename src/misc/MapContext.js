@@ -12,6 +12,10 @@ let initialState = {
 
 let reducer = (state, action) => {
   switch (action.type) {
+    case 'UPDATE_MAP':
+      return { ...state, map: action.data }
+    case 'UPDATE_GOOGLE_MAP':
+      return { ...state, googleMap: action.data }
     case 'UPDATE_GEO_JSON':
       return { ...state, geoJson: action.data }
     default:

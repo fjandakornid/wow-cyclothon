@@ -3,8 +3,8 @@
 ## TODO:
 * ~~Add map~~
 * ~~Add markers~~
-* Display contestants in sidebar
-* Filter contestants by group
+* ~~Display contestants in sidebar~~
+* ~~Filter contestants by group~~
 * Display contestants rank / current place
 * Display path
 * Display weather overlay

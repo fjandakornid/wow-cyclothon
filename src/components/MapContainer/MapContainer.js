@@ -5,6 +5,7 @@ import { MapContext } from '../../misc/MapContext'
 import { useMap } from '../../hooks/useMap'
 import { useGoogleMap } from '../../hooks/useGoogleMap'
 import MarkerHandler from '../../misc/MarkerHandler'
+import { getTree, addNearest } from '../../misc/tree'
 
 import contestantsApi from '../../api/geoJsonApi'
 import mapStyle from '../../data/mapStyle.json'
@@ -22,16 +23,15 @@ const MapContainer = React.memo(function Mappy (props) {
   const mapContainerRef = useRef(null)
   const map = useMap({ googleMap, mapContainerRef, initialConfig })
   const { state, dispatch } = useContext(MapContext)
+  const tree = getTree()
 
   async function updateData () {
     dispatch({ type: 'UPDATE_GOOGLE_MAP', data: googleMap })
     dispatch({ type: 'UPDATE_MAP', data: map })
-
     const response = await contestantsApi.getGeoJson()
-    dispatch({ type: 'UPDATE_GEO_JSON', data: response })
-
     MarkerHandler.updateMarkers(response, googleMap, map)
-    // TODO: calculate travelled distance from kd-tree
+    addNearest(tree, response)
+    dispatch({ type: 'UPDATE_GEO_JSON', data: response })
   }
 
   useEffect(() => {

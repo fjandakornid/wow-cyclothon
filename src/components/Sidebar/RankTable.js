@@ -24,9 +24,9 @@ const RankTable = ({list, title}) => {
         <tbody>
           {list.map((item, index) => (
             <tr key={item.properties.markerid} onClick={() => locateMarker(item.properties.markerid)}>
-              <th scope="row">{index}</th>
+              <th scope="row">{index + 1}</th>
               <td>{item.properties.name}</td>
-              <td>? km</td>
+              <td className='text-right'>{parseFloat(item.properties.nearest.Distance).toFixed(1)} km</td>
             </tr>
           ))}
         </tbody>

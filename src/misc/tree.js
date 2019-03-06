@@ -22,11 +22,11 @@ export const findNearest = (tree, lat, lon) => {
   return nearest
 }
 
-const addNearest = (tree, items) => {
+export const addNearest = (tree, items) => {
   items.forEach((item, i) => {
     const nearest = findNearest(tree, item.geometry.coordinates[1], item.geometry.coordinates[0])
     const next = nearest[0][0]
-    item.nearest = next
+    item.properties.nearest = next
   })
 }
 

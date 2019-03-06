@@ -18,6 +18,13 @@ const initialConfig = {
   styles: mapStyle
 }
 
+function addKmlLayer (googleMap, map) {
+  const kml = new googleMap.maps.KmlLayer({
+    url: 'https://raw.githubusercontent.com/fjandakornid/wow-cyclothon/master/src/data/WOWCyclothon2018.kml',
+    map: map
+  })
+}
+
 const MapContainer = React.memo(function Mappy (props) {
   const googleMap = useGoogleMap(process.env.REACT_APP_GOOGLE_MAPS_KEY)
   const mapContainerRef = useRef(null)
@@ -36,6 +43,7 @@ const MapContainer = React.memo(function Mappy (props) {
 
   useEffect(() => {
     if (googleMap !== null && map !== null) {
+      addKmlLayer(googleMap, map)
       updateData()
     }
   }, [googleMap, map])

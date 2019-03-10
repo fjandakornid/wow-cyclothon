@@ -42,13 +42,13 @@ class WeatherHandler {
 
       var template = [
         '<?xml version="1.0"?>',
-            '<svg width="26px" height="26px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">',
+            '<svg width="60px" height="60px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">',
                 '<text x="0" y="15" fill="{{ color }}">ABC</text>',
             '</svg>'
         ].join('\n');
       var svg = template.replace('{{ color }}', '#800');
       
-      marker.setIcon = { url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg), scaledSize: new googleMap.maps.Size(20, 20) }
+      marker.setIcon({ url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg), scaledSize: new googleMap.maps.Size(60, 60) })
     })
   }
 }

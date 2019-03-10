@@ -1,7 +1,8 @@
 import axios from 'axios'
 import mockApi from './mock/mockContestantsApi'
 
-const path = 'https://siminnnn.is/static/getgeojson/something'
+// todo: remove xxx from url
+const path = 'https://vasi.siminn.xxx.is/smsbeta/static/geojson.json'
 
 class geoJsonApi {
   static getGeoJson () {

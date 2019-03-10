@@ -15,5 +15,5 @@ function getColor (group) {
 
 export function getMarkerColor (group) {
   var color = getColor(group)
-  return `http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
+  return `https://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
 }

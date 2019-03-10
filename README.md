@@ -13,3 +13,4 @@
 * Display altitude graph
 * Handle/remove dropouts (or just re-deploy with hardcoded dropouts?)
 * Display webcams from vegagerðin
+  - http://www4.vegagerdin.is/xml/myndavelar.xml

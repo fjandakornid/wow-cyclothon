@@ -13,7 +13,7 @@ const RankTable = ({list, title}) => {
   return (
     <>
       <div className='title'>{title}</div>
-      <table class="table table-hover table-dark table-sm">
+      <table className="table table-hover table-dark table-sm">
         <thead>
           <tr>
             <th scope="col">#</th>

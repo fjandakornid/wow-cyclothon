@@ -5,9 +5,12 @@ import { MapContext } from '../../misc/MapContext'
 import { useMap } from '../../hooks/useMap'
 import { useGoogleMap } from '../../hooks/useGoogleMap'
 import MarkerHandler from '../../misc/MarkerHandler'
+import WeatherHandler from '../../misc/WeatherHandler'
 import { getTree, addNearest } from '../../misc/tree'
 
 import contestantsApi from '../../api/geoJsonApi'
+import weatherApi from '../../api/weatherApi'
+
 import mapStyle from '../../data/mapStyle.json'
 
 // Iceland: 64.9631° N, 19.0208° W
@@ -39,6 +42,8 @@ const MapContainer = React.memo(function Mappy (props) {
     MarkerHandler.updateMarkers(response, googleMap, map)
     addNearest(tree, response)
     dispatch({ type: 'UPDATE_GEO_JSON', data: response })
+    var weather = await weatherApi.getObservations()
+    WeatherHandler.updateWeather(weather, googleMap, map)
   }
 
   useEffect(() => {

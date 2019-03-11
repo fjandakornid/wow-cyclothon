@@ -17,3 +17,26 @@ export function getMarkerColor (group) {
   var color = getColor(group)
   return `https://maps.google.com/mapfiles/ms/icons/${color}-dot.png`
 }
+
+export function convertDirectionToAngle(direction) {
+  var directions = [
+    "E",
+    "ESE",
+    "SE",
+    "SSE",
+    "S",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
+    "N",
+    "NNE",
+    "NE",
+    "ENE"
+  ]
+  var index = directions.indexOf(direction)
+  return 22.5 * index
+}

@@ -4,6 +4,7 @@ import ErrorBoundary from 'react-error-boundary'
 import { MapContextProvider } from './misc/MapContext'
 import MapContainer from './components/MapContainer'
 import Sidebar from './components/Sidebar'
+import Navbar from './components/Navbar'
 
 function App () {
   const myErrorHandler = (error, componentStack) => {
@@ -26,6 +27,7 @@ function App () {
   return (
     <ErrorBoundary onError={myErrorHandler} FallbackComponent={MyFallbackComponent}>
       <MapContextProvider>
+        <Navbar />
         <div className='container-fluid'>
           <div className='row'>
             <main id='mapContainer' className='col'>

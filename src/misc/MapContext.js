@@ -7,7 +7,8 @@ let MapContext = React.createContext()
 let initialState = {
   map: null,
   googleMap: null,
-  geoJson: []
+  geoJson: [],
+  showWeatherLayer: false
 }
 
 let reducer = (state, action) => {
@@ -18,6 +19,8 @@ let reducer = (state, action) => {
       return { ...state, googleMap: action.data }
     case 'UPDATE_GEO_JSON':
       return { ...state, geoJson: action.data }
+    case 'TOGGLE_WEATHER_LAYER':
+      return { ...state, showWeatherLayer: !state.showWeatherLayer}
     default:
       return state
   }

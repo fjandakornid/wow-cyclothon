@@ -33,17 +33,21 @@ const MapContainer = React.memo(function Mappy (props) {
   const mapContainerRef = useRef(null)
   const map = useMap({ googleMap, mapContainerRef, initialConfig })
   const { state, dispatch } = useContext(MapContext)
-  const tree = getTree()
+  //const tree = getTree()
 
   async function updateData () {
     dispatch({ type: 'UPDATE_GOOGLE_MAP', data: googleMap })
     dispatch({ type: 'UPDATE_MAP', data: map })
+
     const response = await contestantsApi.getGeoJson()
     MarkerHandler.updateMarkers(response, googleMap, map)
-    addNearest(tree, response)
-    dispatch({ type: 'UPDATE_GEO_JSON', data: response })
-    var weather = await weatherApi.getObservations()
-    WeatherHandler.updateWeather(weather, googleMap, map)
+    //addNearest(tree, response)
+    //dispatch({ type: 'UPDATE_GEO_JSON', data: response })
+    
+    if (state.showWeatherLayer) {
+      let weather = await weatherApi.getObservations()
+      WeatherHandler.updateWeather(weather, googleMap, map)
+    }
   }
 
   useEffect(() => {
